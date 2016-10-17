@@ -16,7 +16,7 @@ ix=slice(None,512)
 iy=slice(256,None)
 x_ = f.getCoordinates('x')[ix]
 y_ = f.getCoordinates('y')[iy]
-Ez_ = f.getField(12, ix=ix,iy=iy)
+Ez_ = f.getField(22, ix=ix,iy=iy)
 plt.figure()
 plt.pcolormesh(x_,y_,Ez_)
 plt.title('Ez in upper left block')

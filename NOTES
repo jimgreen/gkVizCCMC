@@ -1,0 +1,30 @@
+ORDER OF COMPONENTS
+ * Data are stored in a Nx*Ny*Nz*Ncomp array under the group 'StructGridField'. For a two-species simulation, the quantities are stored in the order of 
+ 
+   - electron moment data
+   - ion moment data
+   - EM field data
+
+ * Particularly, for a 5-moment simulation, moment data consists of densty, three components of momentum, and the total energy. For example, the electron moment data would be ordered as
+
+   - rho_e, rhovx_e, rhovy_e, rhovz_e, u_e
+
+ Here, u_e = p/(gasGamma-1) + 0.5 * (rhovx_e^2 + rhovy_e^2 + rhovz_e^2 ) /rho_e.
+
+ * For a 10-moment simulation, pressure tensor is used instead of scalar pressure. The electron moment data would be ordered as
+
+   - rho_e, rhovx_e, rhovy_e, rhovz_e,
+     Pxx_e, Pxy_e, Pxz_e, Pyy_e, Pyz_e, Pzz_e
+
+ Be cautiious that, here, Pxx_e, etc. are not thermal pressure components themselves, but something like
+
+ Pij_e = < m_e*vi_e*vj_e >
+
+ with the "<..>" pairs representing the integral over the velocity space. This is actually the term in eq.(8) in the paper [1].
+
+ * The EM data are in order of Ex, Ey, Ez, Bx, By, Bz, phiE, phiB, where phiE and phiB are rarely needed by users, as they are for divergence cleaning in the perfectly hyperbolic equations.
+
+ * The data provided at https://unh.box.com/s/7mahsuhv1q6lrs1z5oqkwxgn3lmx6d06 is from a 10-moment simulation. Thus the data consists of 10 components of the electron moment, 10 components of the ion moment, and 8 components from the EM fields. The index starts from 0, then the index for Ez is 10+10+3-1=22, as used in testGk0.py
+
+
+[1] Wang, L., Hakim, A. H., Bhattacharjee, A., & Germaschewski, K. (2015). Comparison of multi-fluid moment models with particle-in-cell simulations of collisionless magnetic reconnection. Physics of Plasmas, 22(1), 12108. http://doi.org/10.1063/1.4906063
